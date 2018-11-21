@@ -36204,6 +36204,7 @@ St: function (e) {
     var s = e.partObjects[o];
     this.lt.updateObjPart(s.__id, s, t)
   }
+//  console.error('activePlayer', e.activePlayerData);
   if (e.activePlayerIdDirty && (this.me = e.activePlayerId), this.spectating = this.me != this.ct, this.mt = this.Ie.se(this.me), this.mt.vt(e.activePlayerData, this.Ie), e.activePlayerData.weapsDirty && (this.we.weapsDirty = !0), this.spectating) {
     this.we.setSpectating(!0);
     var l = this.Ie.H(this.me),
@@ -36265,6 +36266,7 @@ xe: function (e, t) {
       var s = new u.PlayerInfoMsg;
       s.deserialize(t),
       this.Ie.zt(s);
+      //console.error('playerInfo:',s);
       break;
     case u.Msg.Map:
       var l = new u.MapMsg;
@@ -36276,9 +36278,14 @@ xe: function (e, t) {
     case u.Msg.Update:
       var c = new u.UpdateMsg;
       c.deserialize(t, this.lt),
-      console.error(c);
       this.playing = !0,
       this.St(c);
+      if(c.fullObjects.length != 0){
+      	console.error('newObjects:', c.fullObjects);
+      }
+      if(c.teamData.length != 0){
+      	console.error('teamData:', c.teamData);
+      }
       break;
     case u.Msg.Kill:
       var m = new u.KillMsg;
@@ -36331,6 +36338,7 @@ xe: function (e, t) {
       var M = new u.PlayerStatsMsg;
       M.deserialize(t),
       this.we.setLocalStats(M.playerStats);
+      console.error(M);
       break;
     case u.Msg.GameOver:
       var T = new u.GameOverMsg;
@@ -36360,6 +36368,7 @@ xe: function (e, t) {
         }),
         'throwable' == C.type && (this.mt.lastThrowablePickupSfxTicker = 0.3)
       } else this.Qe.displayPickupMessage(P.type);
+//      console.error(P);
       break;
     case u.Msg.Disconnect:
       var A = new u.DisconnectMsg;
@@ -36374,6 +36383,7 @@ K: function (e, t) {
 },
 Mt: function (e) {
   if (this.ws && this.ws.readyState == this.ws.OPEN) try {
+    //where we send our messages
     this.ws.send(e.getBuffer())
   } catch (e) {
     z.storeGeneric('error', 'sendMessageException'),
@@ -38575,6 +38585,7 @@ return r(e, [
           this.lineGfx.lineTo(e.x, e.y)
         }
       }
+      //console.error('playerPos:', this.playerPos); not working well
     }
   }
 ]),
