@@ -4,4 +4,5 @@ The javascript API to receive messages is WebSocket.onMessage, which brings us t
 Lets put a trace point there and see what happens to the value a
 What we will do in order to research is use grease monkey to replace the scripts and set breakpoints from within
 <br>
+
 Types: 1=player, 2=object, 3=weapons (I guess?)
