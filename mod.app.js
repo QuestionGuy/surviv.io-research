@@ -1,3 +1,4 @@
+console.log('surviv.io cheat active');
 webpackJsonp([1], {
   '064c0a93': function (e, t, a) {
     'use strict';
