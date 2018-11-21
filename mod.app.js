@@ -35792,6 +35792,8 @@ k: function (e, t, a, i) {
       this.ws.onmessage = function (e) {
         for (var t = new u.MsgStream(e.data); ; ) {
           var a = t.deserializeMsgType();
+
+
           if (a == u.Msg.None) break;
           r.xe(a, t.getStream())
         }
@@ -36242,6 +36244,7 @@ St: function (e) {
 xe: function (e, t) {
   var a = this;
   switch (e) {
+    // HOT SPOT FOR MESSAGES
     case u.Msg.Joined:
       var i = new u.JoinedMsg;
       i.deserialize(t),
@@ -36273,6 +36276,7 @@ xe: function (e, t) {
     case u.Msg.Update:
       var c = new u.UpdateMsg;
       c.deserialize(t, this.lt),
+      console.error(c);
       this.playing = !0,
       this.St(c);
       break;
