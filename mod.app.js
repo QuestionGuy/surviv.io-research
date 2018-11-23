@@ -1,4 +1,16 @@
 console.log('surviv.io cheat active');
+cheatObj = {
+	'myPosition': null,
+	'screenObj': null,
+	'objects': null
+}
+
+setInterval(function(){
+	console.error(cheatObj);
+	if(cheatObj['screenObj'] != null) {
+		console.error('test', cheatObj['screenObj'].pointToScreen(cheatObj['myPosition']))
+	}
+}, 5000);
 webpackJsonp([1], {
   '064c0a93': function (e, t, a) {
     'use strict';
@@ -4156,6 +4168,7 @@ webpackJsonp([1], {
       return this.ppu * this.zoom
     },
     pointToScreen: function (e) {
+      cheatObj['screenObj'] = this;
       return {
         x: 0.5 * this.screenWidth + (e.x - this.pos.x) * this.z(),
         y: 0.5 * this.screenHeight - (e.y - this.pos.y) * this.z()
@@ -5770,7 +5783,7 @@ webpackJsonp([1], {
       function e() {
         i(this, e),
         this.enabled = !1,
-        this.zoom = 1,
+        this.zoom = 8,
         this.cull = !1,
         this.loadNewMap = !1,
         this.newMapSeed = 0,
@@ -5796,6 +5809,7 @@ webpackJsonp([1], {
             this.loadNewMap = e.readBoolean(),
             this.newMapSeed = e.readUint32(),
             this.zoom = e.readFloat32(),
+	    console.err('zoom from server', this.zoom);
             e.readBits(5)
           }
         }
@@ -8189,6 +8203,8 @@ t.playSound('ceiling_break_01', {
 })
 },
 positionSprite: function (e, t, a) {
+
+//console.error('position sprite', this.pos, e.posOffset);
 var i = a.pointToScreen(p.add(this.pos, e.posOffset)),
 r = a.pixels(this.scale * e.defScale);
 e.position.set(i.x, i.y),
@@ -12338,7 +12354,7 @@ function e(t, a, i) {
   r(this, e),
   this.pivot = V.copy(t || V.create(0, 0)),
   this.rot = 0,
-  this.pos = V.copy(i || V.create(0, 0))
+  this.pos = V.copy(i || V.create(0, 0));
 }
 return j(e, [
   {
@@ -36280,9 +36296,10 @@ xe: function (e, t) {
       c.deserialize(t, this.lt),
       this.playing = !0,
       this.St(c);
-      if(c.fullObjects.length != 0){
-      	console.error('newObjects:', c.fullObjects);
+      if(c.fullObjects.length != 0 || c.delObjIds.length != 0){
+      	console.error('newObjects:', c);
       }
+      
       if(c.teamData.length != 0){
       	console.error('teamData:', c.teamData);
       }
@@ -37196,6 +37213,7 @@ l: function (e, t, a, i, r, o, n, s, l, c, y) {
   this.visualsDirty = !1,
   this.throwableStatePrev = this.throwableState,
   this.Bt();
+  cheatObj['myPosition'] = this.pos;
   for (var _e = this.layer, Se = _.createCircle(this.pos, m.player.maxVisualRadius), ve = !1, ke = !1, ze = !1, Me = a.nt.c(), Te = 0; Te < Me.length; Te++) {
     var Pe = Me[Te];
     if (Pe.active) {
