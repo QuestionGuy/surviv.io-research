@@ -10,6 +10,12 @@ Wasn't able to find any references to my player position, perhaps the object pos
 <br>
 <code>
 cheatObj = {
-myPosition=my position as vector
+
+  myPosition=my position as vector,
+  
+  screenObj=object containing screen functions, 
+  
+  objects=array stating current objects ingame
+  
 }
 </code>
