@@ -13,6 +13,7 @@
  */
 console.log('surviv.io cheat active');
 cheatObj = {
+	'debugMode': true,
 	/*Object will contain my position*/
 	'myPosition': null,
 	/*screen object with function called point to screen which will be very useful*/
@@ -25,25 +26,12 @@ cheatObj = {
 	'activeAimbot': false,
 	/*called when an update message is received*/
 	'objectsCallback': function(c){
-		console.error('newObjects:', c);	
-		// deleting old objects
-		var myDelObjectIds = c.delObjIds;	
-		for(var i=0;i < cheatObj['players'].length;i++)	{
-			var curPlayer = cheatObj['players'][i];
-			var curPlayerId = curPlayer.__id;
-			if(myDelObjectIds.includes(curPlayerId)){
-			
-			}
+		if(this.debugMode) {
+			console.error('newObjects:', c);
 		}
-		// inserting new objects
-		var myObjects = c.fullObjects;
-		for(var i=0;i < myObjects.length;i++) {
-			var curObject = myObjects[i];
-			// inserting new players
-			if(curObject.__type==1) {
-				cheatObj['players'].push(curObject);
-			}
-		}
+		// for each object, if type 1 add to player dict
+		// delete delObjIds from dict
+		// calculate nearest player
 	}
 }
 
