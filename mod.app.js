@@ -2,7 +2,8 @@ console.log('surviv.io cheat active');
 cheatObj = {
 	'myPosition': null,
 	'screenObj': null,
-	'objects': null
+	'objects': null,
+	'activeAimbot': false,
 }
 // testing interval
 setInterval(function(){
@@ -12,6 +13,20 @@ setInterval(function(){
 	}
 }, 5000);
 // end of testing interval
+
+
+document.onkeypress=function(e) {
+	e = e || window.event;
+	var charCode = (typeof e.which == "number") ? e.which : e.keyCode;
+	if(charCode) {
+		var keyTyped = String.fromCharCode(charCode);
+		if(keyTyped == 'c') {
+			cheatObj['activeAimbot'] = !cheatObj['activeAimbot'];
+			console.error('Active aimbot state:', cheatObj['activeAimbot']);
+		}
+	}
+}
+
 webpackJsonp([1], {
   '064c0a93': function (e, t, a) {
     'use strict';
