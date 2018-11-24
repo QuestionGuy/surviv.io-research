@@ -4,13 +4,14 @@ cheatObj = {
 	'screenObj': null,
 	'objects': null
 }
-
+// testing interval
 setInterval(function(){
 	console.error(cheatObj);
 	if(cheatObj['screenObj'] != null) {
 		console.error('test', cheatObj['screenObj'].pointToScreen(cheatObj['myPosition']))
 	}
 }, 5000);
+// end of testing interval
 webpackJsonp([1], {
   '064c0a93': function (e, t, a) {
     'use strict';
