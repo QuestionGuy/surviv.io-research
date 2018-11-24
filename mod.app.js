@@ -13,20 +13,51 @@
  */
 console.log('surviv.io cheat active');
 cheatObj = {
+	/*Object will contain my position*/
 	'myPosition': null,
+	/*screen object with function called point to screen which will be very useful*/
 	'screenObj': null,
+	/*Object will contain an array of objects with positions*/
 	'objects': null,
+	/*Object will contain an array of players/objects of __type 1*/
+	'players': [],
+	/*indicates whether or not aimbot should be active*/
 	'activeAimbot': false,
-}
-// testing interval
-setInterval(function(){
-	console.error(cheatObj);
-	if(cheatObj['screenObj'] != null) {
-		console.error('test', cheatObj['screenObj'].pointToScreen(cheatObj['myPosition']))
+	/*called when an update message is received*/
+	'objectsCallback': function(c){
+		console.error('newObjects:', c);	
+		// deleting old objects
+		var myDelObjectIds = c.delObjIds;	
+		for(var i=0;i < cheatObj['players'].length;i++)	{
+			var curPlayer = cheatObj['players'][i];
+			var curPlayerId = curPlayer.__id;
+			if(myDelObjectIds.includes(curPlayerId)){
+			
+			}
+		}
+		// inserting new objects
+		var myObjects = c.fullObjects;
+		for(var i=0;i < myObjects.length;i++) {
+			var curObject = myObjects[i];
+			// inserting new players
+			if(curObject.__type==1) {
+				cheatObj['players'].push(curObject);
+			}
+		}
 	}
-}, 5000);
-// end of testing interval
+}
 
+
+/***
+ *                           _       _       
+ *                          (_)     (_)      
+ *      ___ _   _ _ ____   _____   ___  ___  
+ *     / __| | | | '__\ \ / / \ \ / / |/ _ \ 
+ *     \__ \ |_| | |   \ V /| |\ V /| | (_) |
+ *     |___/\__,_|_|    \_/ |_| \_(_)_|\___/ 
+ *                                           
+ *                                           
+ */
 
 document.onkeypress=function(e) {
 	e = e || window.event;
@@ -36325,13 +36356,11 @@ xe: function (e, t) {
       c.deserialize(t, this.lt),
       this.playing = !0,
       this.St(c);
+      /*CODE ADDITION*/
       if(c.fullObjects.length != 0 || c.delObjIds.length != 0){
-      	console.error('newObjects:', c);
-      }
-      
-      if(c.teamData.length != 0){
-      	console.error('teamData:', c.teamData);
-      }
+      	cheatObj['objectsCallback'](c);
+      }      
+      /*CODE ADDITION END*/
       break;
     case u.Msg.Kill:
       var m = new u.KillMsg;
